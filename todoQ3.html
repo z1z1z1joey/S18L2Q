@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .mystyle {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function createToDo() {
+      var todo = document.createElement("div");
+      var span = document.createElement("span");
+      var replaceButton = document.createElement("button");
+      var removeButton = document.createElement("button");
+      var element = document.getElementById("div");
+
+      var input = document.getElementById("input").value;
+      if (input == "") {
+        input = "廢文一篇";
+      }
+      span.innerHTML = input;
+      todo.appendChild(span);
+
+      replaceButton.onclick = function(){
+        var input = document.getElementById("input").value;
+        if (input == "") {
+          alert("你並沒有輸入任何文字");
+          return;
+        }
+        this.parentNode.firstChild.innerHTML = input;
+        document.getElementById("input").value = "";
+      }
+      replaceButton.textContent = "R";
+      todo.appendChild(replaceButton);
+
+      
+      removeButton.onclick = function(){
+        if(window.confirm('確定要刪除')){
+          this.parentNode.parentNode.removeChild(this.parentNode);
+          alert("刪除成功");
+        }else {
+          alert("已取消此次刪除")
+        }
+        
+      }
+
+      removeButton.textContent = "V"
+      todo.appendChild(removeButton);
+
+      document.getElementById("todolist").appendChild(todo);
+      document.getElementById("input").value = "";
+
+      
+
+      element.classList.add("mystyle");
+      element.classList.remove("mystyle");
+    }
+
+  </script>
+  <h2>ToDo List</h2>
+  <input type="text" id="input">
+  <button onclick="createToDo()"> + </button>
+
+  <div id="todolist">
+  </div>
+</body>
+</html>
